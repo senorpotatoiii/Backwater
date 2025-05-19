@@ -6,33 +6,27 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
-    Vector3 rawInput = new Vector2();
-    Vector2 newPosition;
-
-    void Update()
-    {
-        if (rawInput != Vector3.zero)
-        {
-            Movement();
-        }
-    }
+    Rigidbody2D rb;
     
-    void Movement()
+    public void SetMovementSpeed(float movementSpeed)
     {
-        newPosition =  (rawInput * movementSpeed * Time.deltaTime) + transform.position;
-        
-        // Check if the player is somewhere they are not supposed to be.
-        //
-        //
-        //
-        
-        transform.position = newPosition;
+        this.movementSpeed = movementSpeed;
     }
 
-    // Is called automatically through the Player Input system.
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    // Is called automatically through the Player Input system when a
+    // button is pressed and when it is released.
     void OnMove(InputValue value) 
     {
-        // Returns value as a 2D Vector and assigns it to rawInput.
-        rawInput = value.Get<Vector2>();
+        /*
+         * Sets the velocity of the player's RigidBody2D component to the direction the player
+         * is going. This is stored in value and normalized so that they are not faster when moving
+         * along diagonals.
+         */
+        rb.velocity = value.Get<Vector2>().normalized * movementSpeed;
     }
 }
