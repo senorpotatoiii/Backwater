@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
+    [SerializeField] GameObject testObject;
     Rigidbody2D rb;
     
     public void SetMovementSpeed(float movementSpeed)
@@ -28,5 +29,10 @@ public class PlayerMovement : MonoBehaviour
          * along diagonals.
          */
         rb.velocity = value.Get<Vector2>().normalized * movementSpeed;
+    }
+    
+    void OnTest()
+    {
+        testObject.GetComponent<NPCMovement>().TestMove();
     }
 }
