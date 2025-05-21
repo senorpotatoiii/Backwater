@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
     [SerializeField] GameObject testObject;
+    FieldOfView fieldOfView;
     Rigidbody2D rb;
+    Vector2 rawInput;
     
     public void SetMovementSpeed(float movementSpeed)
     {
@@ -17,6 +19,25 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        fieldOfView = FindObjectOfType<FieldOfView>();
+    }
+    
+    void Update()
+    {
+        Move();
+        UpdateFieldOfView();
+    }
+
+    void Move()
+    {
+        rb.velocity = rawInput * movementSpeed;
+    }
+
+    void UpdateFieldOfView()
+    {
+        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        fieldOfView.SetAimDirection((targetPosition - transform.position).normalized);
+        fieldOfView.SetOrigin(transform.position);
     }
 
     // Is called automatically through the Player Input system when a
@@ -28,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
          * is going. This is stored in value and normalized so that they are not faster when moving
          * along diagonals.
          */
-        rb.velocity = value.Get<Vector2>().normalized * movementSpeed;
+        rawInput = value.Get<Vector2>().normalized;
     }
     
     void OnTest()
