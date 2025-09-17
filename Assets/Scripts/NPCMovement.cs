@@ -17,4 +17,10 @@ public class NPCMovement : MonoBehaviour
         Debug.Log("Test");
         // Call MoveTo method.
     }
+    
+    // In progress
+    void MoveTo(Vector3 targetPosition)
+    {
+        Vector2 deltaPosition = targetPosition - transform.position;
+    }
 }

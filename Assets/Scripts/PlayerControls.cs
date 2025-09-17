@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerControls : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
+    [SerializeField] GameObject testNPC;
     [SerializeField] GameObject testObject;
     FieldOfView fieldOfView;
     Rigidbody2D rb;
@@ -52,8 +53,21 @@ public class PlayerMovement : MonoBehaviour
         rawInput = value.Get<Vector2>().normalized;
     }
     
+    void OnFlashlight()
+    {
+        fieldOfView.SetFlashlight(!fieldOfView.GetFlashlight());
+        fieldOfView.GetComponent<MeshRenderer>().enabled = fieldOfView.GetFlashlight();
+    }
+    
+    void OnInteract()
+    {
+        if (testObject != null)
+        testObject.GetComponent<Interactibility>().Interact();
+    }
+    
     void OnTest()
     {
-        testObject.GetComponent<NPCMovement>().TestMove();
+        if (testObject != null)
+        testNPC.GetComponent<NPCMovement>().TestMove();
     }
 }

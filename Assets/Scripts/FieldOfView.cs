@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FieldOfView : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] float viewDistance = 50f;
     Vector3 origin;
     Mesh mesh;
+    bool flashlightOn = false;
     
     // Based on https://www.youtube.com/watch?v=CSeUMTaNFYk
     
@@ -25,7 +28,10 @@ public class FieldOfView : MonoBehaviour
     
     void LateUpdate()
     {
-        UpdateMesh();
+        if (flashlightOn)
+        {
+            UpdateMesh();
+        }
     }
     
     void UpdateMesh()
@@ -101,4 +107,7 @@ public class FieldOfView : MonoBehaviour
     {
         startingAngle = GetAngleFromVector(aimDirection) + fov / 2f;
     }
+    
+    public void SetFlashlight(bool flashlight) { flashlightOn = flashlight; }
+    public bool GetFlashlight() { return flashlightOn; }
 }
