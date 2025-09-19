@@ -3,25 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// <para>
 /// Class <c>NodeSpawner</c> creates a grid of <c>Node</c> objects and
 /// sets their connections automatically.
+/// </para>
+/// <see cref="Node.cs"/>
 /// </summary>
 public class NodeSpawner : MonoBehaviour
 {
     [SerializeField] Node prefab;
-    [SerializeField] int rows = 3;
-    [SerializeField] int collumns = 3;
-    [SerializeField] float spacing = 1f;
+    [SerializeField] float yUnits = 3;
+    [SerializeField] float xUnits = 3;
+    [SerializeField] float nodesPerUnit = 1f;
     List<Node> nodes = new List<Node>();
+    int rows;
+    int collumns;
     
-    void Start()
+    void Awake()
     {
+        rows = (int)(yUnits * nodesPerUnit);
+        collumns = (int)(xUnits * nodesPerUnit);
         CreateNodes();
-        CreateConnections();
     }
     
     /// <summary>
     /// Creates a grid of <c>Node</c> objects, expanding right and down.
+    /// <para>Designed without obstacles or terrain in mind.</para>
     /// </summary>
     void CreateNodes()
     {
@@ -29,63 +36,33 @@ public class NodeSpawner : MonoBehaviour
         {
             for (int j = 0; j < collumns; j++)
             {
-                Vector3 newPosition = new Vector3(transform.position.x + (j * spacing),
-                                                    transform.position.y - (i * spacing));
+                Vector3 newPosition = new Vector3(transform.position.x + (j / nodesPerUnit),
+                                                    transform.position.y - (i / nodesPerUnit));
                 Node newNode = Instantiate(prefab, newPosition, Quaternion.identity, transform);
                 nodes.Add(newNode);
-            }
-        }
-    }
 
-    /// <summary>
-    /// Adds connections for previously created <c>Node</c> objects in
-    /// <c>CreateNodes</c>.
-    /// <see cref="CreateNodes" />
-    /// </summary>
-    void CreateConnections()
-    {
-        foreach (Node node in nodes)
-        {
-            bool leftEdge = nodes.IndexOf(node) % collumns == 0;
-            bool rightEdge = nodes.IndexOf(node) % collumns == collumns - 1;
-            bool topEdge = nodes.IndexOf(node) / collumns == 0;
-            bool botEdge = nodes.IndexOf(node) / collumns == rows - 1;
-            
-            if (topEdge && leftEdge)
-            {
-                Debug.Log("Top Left Corner");
-            }
-            else if (topEdge && rightEdge)
-            {
-                Debug.Log("Top Right Corner");
-            }
-            else if (botEdge && leftEdge)
-            {
-                Debug.Log("Bottom Left Corner");
-            }
-            else if (botEdge && rightEdge)
-            {
-                Debug.Log("Bottom Right Corner");
-            }
-            else if (topEdge)
-            {
-                Debug.Log("Top Edge");
-            }
-            else if (botEdge)
-            {
-                Debug.Log("Bottom Edge");
-            }
-            else if (leftEdge)
-            {
-                Debug.Log("Left Edge");
-            }
-            else if (rightEdge)
-            {
-                Debug.Log("Right Edge");
-            }
-            else
-            {
-                Debug.Log("Middle");
+                // Creates connections with nodes behind currently created node if able.
+                int index = i * collumns + j;
+                if (index % collumns != 0)
+                {
+                    newNode.connections.Add(nodes[index - 1]);
+                    nodes[index - 1].connections.Add(newNode);
+                }
+                if (index / collumns != 0)
+                {
+                    newNode.connections.Add(nodes[index - collumns]);
+                    nodes[index - collumns].connections.Add(newNode);
+                    if (index % collumns != 0)
+                    {
+                        newNode.connections.Add(nodes[index - collumns - 1]);
+                        nodes[index - collumns - 1].connections.Add(newNode);
+                    }
+                    if (index % collumns != collumns - 1)
+                    {
+                        newNode.connections.Add(nodes[index - collumns + 1]);
+                        nodes[index - collumns + 1].connections.Add(newNode);
+                    }
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
@@ -63,11 +64,5 @@ public class PlayerControls : MonoBehaviour
     {
         if (testObject != null)
         testObject.GetComponent<Interactibility>().Interact();
-    }
-    
-    void OnTest()
-    {
-        if (testObject != null)
-        testNPC.GetComponent<NPCMovement>().TestMove();
     }
 }
