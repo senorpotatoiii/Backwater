@@ -18,6 +18,8 @@ public class NodeSpawner : MonoBehaviour
     List<Node> nodes = new List<Node>();
     int rows;
     int collumns;
+
+    [SerializeField] bool debuggingMode = false;
     
     void Awake()
     {
@@ -41,7 +43,11 @@ public class NodeSpawner : MonoBehaviour
                 Node newNode = Instantiate(prefab, newPosition, Quaternion.identity, transform);
                 nodes.Add(newNode);
 
-                // Creates connections with nodes behind currently created node if able.
+                /*
+                 * As each node spawns, it creates up to 4 connections with the nodes around it
+                 * Left, up, left-up, right-up
+                 * Each connection is checked individually to account for any gaps in the graph.
+                 */
                 int index = i * collumns + j;
                 if (index % collumns != 0)
                 {
@@ -62,6 +68,23 @@ public class NodeSpawner : MonoBehaviour
                         newNode.connections.Add(nodes[index - collumns + 1]);
                         nodes[index - collumns + 1].connections.Add(newNode);
                     }
+                }
+            }
+        }
+    }
+    
+    void OnDrawGizmos()
+    {
+        if (!debuggingMode) { return; }
+        Gizmos.color = Color.blue;
+
+        foreach (Node n in nodes)
+        {
+            if (n.connections.Count > 0)
+            {
+                for (int i = 0; i < n.connections.Count; i++)
+                {
+                    Gizmos.DrawLine(n.transform.position, n.connections[i].transform.position);
                 }
             }
         }

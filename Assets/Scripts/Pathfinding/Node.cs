@@ -34,18 +34,4 @@ public class Node : MonoBehaviour
     public float hScore;
     /// <value>Sum of gScore and hScore.</value>
     public float FScore { get => gScore + hScore; }
-
-    // Used to debug the connections of nodes.
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        
-        if (connections.Count > 0)
-        {
-            for (int i = 0; i < connections.Count; i++)
-            {
-                Gizmos.DrawLine(transform.position, connections[i].transform.position);
-            }
-        }
-    }
 }

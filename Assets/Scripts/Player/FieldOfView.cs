@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class FieldOfView : MonoBehaviour
 {
     [Header("Collide With")]
@@ -15,12 +16,18 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] float viewDistance = 50f;
     Vector3 origin;
     Mesh mesh;
-    bool flashlightOn = false;
+    bool flashlightOn { get; set; }
     
     // Based on https://www.youtube.com/watch?v=CSeUMTaNFYk
     
+    public void Flashlight(InputAction.CallbackContext context)
+    {
+        GetComponent<MeshRenderer>().enabled = (flashlightOn = !flashlightOn);
+    }
+    
     void Start()
     {
+        flashlightOn = false;
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
         origin = Vector3.zero;
@@ -107,7 +114,4 @@ public class FieldOfView : MonoBehaviour
     {
         startingAngle = GetAngleFromVector(aimDirection) + fov / 2f;
     }
-    
-    public void SetFlashlight(bool flashlight) { flashlightOn = flashlight; }
-    public bool GetFlashlight() { return flashlightOn; }
 }

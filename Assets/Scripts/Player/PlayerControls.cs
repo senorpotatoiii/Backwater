@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
-    [SerializeField] GameObject testNPC;
-    [SerializeField] GameObject testObject;
     FieldOfView fieldOfView;
     Rigidbody2D rb;
     Vector2 rawInput;
@@ -26,13 +24,8 @@ public class PlayerControls : MonoBehaviour
     
     void Update()
     {
-        Move();
-        UpdateFieldOfView();
-    }
-
-    void Move()
-    {
         rb.velocity = rawInput * movementSpeed;
+        UpdateFieldOfView();
     }
 
     void UpdateFieldOfView()
@@ -42,27 +35,17 @@ public class PlayerControls : MonoBehaviour
         fieldOfView.SetOrigin(transform.position);
     }
 
-    // Is called automatically through the Player Input system when a
-    // button is pressed and when it is released.
-    void OnMove(InputValue value) 
+    /*
+     * Is called automatically through the Player Input system when a
+     * button is pressed and when it is released.
+     */
+    public void Move(InputAction.CallbackContext context) 
     {
         /*
          * Sets the velocity of the player's RigidBody2D component to the direction the player
          * is going. This is stored in value and normalized so that they are not faster when moving
          * along diagonals.
          */
-        rawInput = value.Get<Vector2>().normalized;
-    }
-    
-    void OnFlashlight()
-    {
-        fieldOfView.SetFlashlight(!fieldOfView.GetFlashlight());
-        fieldOfView.GetComponent<MeshRenderer>().enabled = fieldOfView.GetFlashlight();
-    }
-    
-    void OnInteract()
-    {
-        if (testObject != null)
-        testObject.GetComponent<Interactibility>().Interact();
+        rawInput = context.ReadValue<Vector2>().normalized;
     }
 }

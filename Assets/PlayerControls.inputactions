@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "8b6c964a-1ec8-4976-bce9-ced0ab118135",
             "actions": [
                 {
@@ -13,15 +13,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Test",
-                    "type": "Button",
-                    "id": "884d0190-42f3-4ecb-8b70-914b3447b912",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "Flashlight",
@@ -155,17 +146,6 @@
                 },
                 {
                     "name": "",
-                    "id": "283f4311-b053-475c-9678-94a4837fee4e",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Test",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ce7ef8bb-7f6a-4983-973a-7c80dbf062fb",
                     "path": "<Keyboard>/f",
                     "interactions": "",
@@ -187,12 +167,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Keybinds",
-            "id": "5b8991e1-4aa8-4b02-9fad-a78b9fc0280d",
-            "actions": [],
-            "bindings": []
         }
     ],
     "controlSchemes": []
