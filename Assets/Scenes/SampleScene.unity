@@ -166,10 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7510ac6bdeffc9042a4e93680907e010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialoguePannel: {fileID: 1175658487}
-  portraitImage: {fileID: 1159565868}
-  nameText: {fileID: 809282279}
-  dialogueText: {fileID: 1791616505}
+  _dialoguePannel: {fileID: 1175658487}
+  _portraitImage: {fileID: 1159565868}
+  _nameText: {fileID: 809282279}
+  _dialogueText: {fileID: 1791616505}
 --- !u!1001 &214735069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,6 +180,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1917931644089264533, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
       propertyPath: dialogueData
+      value: 
+      objectReference: {fileID: 11400000, guid: 00361279a26dc0f4b9ae1db6beab5c6c, type: 2}
+    - target: {fileID: 1917931644089264533, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
+      propertyPath: _dialogueData
       value: 
       objectReference: {fileID: 11400000, guid: 00361279a26dc0f4b9ae1db6beab5c6c, type: 2}
     - target: {fileID: 4523426855823495578, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
@@ -534,13 +538,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96215e159cd9dd84ba393b3cfb7c5f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  _layerMask:
     serializedVersion: 2
     m_Bits: 64
-  fov: 90
-  rayCount: 50
-  startingAngle: 0
-  viewDistance: 5
+  _fov: 90
+  _rayCount: 90
+  _startingAngle: 0
+  _viewDistance: 6
 --- !u!4 &628793885
 Transform:
   m_ObjectHideFlags: 0
@@ -1366,18 +1370,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 628793884}
-    - target: {fileID: 64039582799117493, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Flashlight
-      objectReference: {fileID: 0}
-    - target: {fileID: 4721044495893896047, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4721044495893896047, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -371587121
-      objectReference: {fileID: 0}
     - target: {fileID: 5410580863220815499, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
       propertyPath: m_Name
       value: Player

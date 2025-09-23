@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +8,10 @@ using UnityEngine;
 public abstract class AI : MonoBehaviour
 {
     [Header("Generic AI")]
-    [SerializeField] float speed = 1f;
-    protected Rigidbody2D rb;
-    Node currentNode;
-    List<Node> path = new List<Node>();
+    [SerializeField] private float _speed = 1f;
+    private Node _currentNode;
+    private List<Node> _path = new List<Node>();
+    protected Rigidbody2D Rb;
     
     /// <summary>
     /// Sets <c>rb</c> to a reference of
@@ -20,7 +19,7 @@ public abstract class AI : MonoBehaviour
     /// </summary>
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        Rb = GetComponent<Rigidbody2D>();
     }
     
     /// <summary>
@@ -32,7 +31,7 @@ public abstract class AI : MonoBehaviour
         Node[] nodes = FindObjectsOfType<Node>();
         if (nodes.Length > 0)
         {
-            currentNode = nodes[Random.Range(0, nodes.Length)];
+            _currentNode = nodes[Random.Range(0, nodes.Length)];
         }
     }
     
@@ -47,25 +46,25 @@ public abstract class AI : MonoBehaviour
     /// </summary>
     protected void CreatePath()
     {
-        if (!currentNode) return;
-        if (path.Count > 0)
+        if (!_currentNode) return;
+        if (_path.Count > 0)
         {
             int x = 0;
 
-            MoveTo(path[x].transform.position);
+            MoveTo(_path[x].transform.position);
             
-            if (Vector2.Distance(transform.position, path[x].transform.position) < 0.1f)
+            if (Vector2.Distance(transform.position, _path[x].transform.position) < 0.1f)
             {
-                currentNode = path[x];
-                path.RemoveAt(x);
+                _currentNode = _path[x];
+                _path.RemoveAt(x);
             }
         }
         else
         {
             Node[] nodes = FindObjectsOfType<Node>();
-            while (path == null || path.Count == 0)
+            while (_path == null || _path.Count == 0)
             {
-                path = AStarManager.instance.GeneratePath(currentNode, nodes[Random.Range(0, nodes.Length)]);
+                _path = AStarManager.s_Instance.GeneratePath(_currentNode, nodes[Random.Range(0, nodes.Length)]);
             }
         }
     }
@@ -77,6 +76,6 @@ public abstract class AI : MonoBehaviour
     public void MoveTo(Vector2 destination)
     {
         Vector2 direction = (destination - new Vector2(transform.position.x, transform.position.y)).normalized;
-        rb.velocity = direction * speed;
+        Rb.velocity = direction * _speed;
     }
 }

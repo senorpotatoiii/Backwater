@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Detects if an interactable object is in range of the player.
+/// </summary>
 [RequireComponent(typeof(CircleCollider2D))]
 public class InteractionDetector : MonoBehaviour
 {
-    IInteractable interactableInRange = null;
+    private IInteractable interactableInRange = null;
     
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -16,7 +17,7 @@ public class InteractionDetector : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
         {
@@ -24,7 +25,7 @@ public class InteractionDetector : MonoBehaviour
         }
     }
     
-    void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out IInteractable interactable) && interactable == interactableInRange)
         {

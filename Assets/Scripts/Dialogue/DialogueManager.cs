@@ -1,52 +1,73 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    [HideInInspector] public static DialogueManager instance;
-    [SerializeField] GameObject dialoguePannel;
-    [SerializeField] Image portraitImage;
-    [SerializeField] TMP_Text nameText, dialogueText;
-    bool isTyping;
-    int dialogueIndex;
-    public Action dialogueFinished;
+    [HideInInspector] public static DialogueManager s_Instance;
     
-    void Awake()
+    [SerializeField] private GameObject _dialoguePannel;
+    [SerializeField] private Image _portraitImage;
+    [SerializeField] private TMP_Text _nameText, _dialogueText;
+    private bool _isTyping;
+    private int _dialogueIndex;
+    
+    /// <summary>
+    /// Called when the current dialogue finishes its last line.
+    /// </summary>
+    public Action DialogueFinished;
+    
+    private void Awake()
     {
-        instance = this;
+        s_Instance = this;
     }
 
+    /// <summary>
+    /// <para>
+    /// Initializes all necessary values and text fields, then starts
+    /// the typing coroutine.
+    /// </para>
+    /// <see cref="TypeLine"/>
+    /// </summary>
+    /// <param name="data"></param>
     public void StartDialogue(Dialogue data)
     {
         if (data.IsNPC)
         {
-            nameText.SetText(data.NPCName);
-            portraitImage.gameObject.SetActive(true);
-            portraitImage.sprite = data.Portrait;
+            _nameText.SetText(data.NPCName);
+            _portraitImage.gameObject.SetActive(true);
+            _portraitImage.sprite = data.Portrait;
         }
         else
         {
-            nameText.SetText("");
-            portraitImage.gameObject.SetActive(false);
+            _nameText.SetText("");
+            _portraitImage.gameObject.SetActive(false);
         }
-        dialogueIndex = 0;
-        dialoguePannel.SetActive(true);
+        _dialogueIndex = 0;
+        _dialoguePannel.SetActive(true);
         StartCoroutine(TypeLine(data));
     }
     
+    /// <summary>
+    /// <para>
+    /// If a line is currently being printed, skips to the end of the line.
+    /// Otherwise, starts printing the next line if one is available and
+    /// ends the dialogue if there isn't.
+    /// </para>
+    /// <see cref="TypeLine"/>, <see cref="EndDialogue"/>
+    /// </summary>
+    /// <param name="data"></param>
     public void NextLine(Dialogue data)
     {
-        if (isTyping)
+        if (_isTyping)
         {
             StopAllCoroutines();
-            dialogueText.SetText(data.DialogueLines[dialogueIndex]);
-            isTyping = false;
+            _dialogueText.SetText(data.DialogueLines[_dialogueIndex]);
+            _isTyping = false;
         }
-        else if (++dialogueIndex < data.DialogueLines.Length)
+        else if (++_dialogueIndex < data.DialogueLines.Length)
         {
             StartCoroutine(TypeLine(data));
         }
@@ -55,37 +76,46 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
         }
     }
-    
-    IEnumerator TypeLine(Dialogue data)
+
+    /// <summary>
+    /// Sets the alpha of the current line to 0, turning the text invisible.
+    /// Then iterates through the characters in the line, turning all
+    /// characters revealed to far visible again.
+    /// </summary>
+    /// <param name="data"></param>
+    private IEnumerator TypeLine(Dialogue data)
     {
-        isTyping = true;
-        string currentLine = data.DialogueLines[dialogueIndex];
-        dialogueText.SetText("<color=#00000000>" + currentLine + "</color>");
+        _isTyping = true;
+        string currentLine = data.DialogueLines[_dialogueIndex];
+        _dialogueText.SetText("<color=#00000000>" + currentLine + "</color>");
         string printedCharacters;
         string hiddenCharacters;
 
-        int i = 0;
-        while (i < currentLine.Length)
+        for (int i = 0; i < currentLine.Length; i++)
         {
-            while (currentLine[i] == ' ')
-            {
-                i++;
-            }
+            while (currentLine[i] == ' ') i++;
             printedCharacters = currentLine.Substring(0, ++i);
-            hiddenCharacters = currentLine.Substring(i, currentLine.Length - printedCharacters.Length);
+            hiddenCharacters = currentLine.Substring(i--, currentLine.Length - printedCharacters.Length);
 
-            dialogueText.SetText(printedCharacters + "<color=#00000000>" + hiddenCharacters + "</color>");
+            _dialogueText.SetText(printedCharacters + "<color=#00000000>" + hiddenCharacters + "</color>");
             yield return new WaitForSeconds(data.TypingSpeed);
         }
 
-        isTyping = false;
+        _isTyping = false;
     }
     
+    /// <summary>
+    /// <para>
+    /// Stops all typing, calls the <c>Dialogue Finished</c> event,
+    /// and diables the dialogue UI.
+    /// </para>
+    /// <see cref="DialogueFinished"/>
+    /// </summary>
     public void EndDialogue()
     {
         StopAllCoroutines();
-        dialogueFinished?.Invoke();
-        dialogueText.SetText("");
-        dialoguePannel.SetActive(false);
+        DialogueFinished?.Invoke();
+        _dialogueText.SetText("");
+        _dialoguePannel.SetActive(false);
     }
 }

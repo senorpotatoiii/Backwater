@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,11 +12,11 @@ using UnityEngine;
 /// </summary>
 public class AStarManager : MonoBehaviour
 {
-    [HideInInspector] public static AStarManager instance;
+    [HideInInspector] public static AStarManager s_Instance;
 
-    void Awake()
+    private void Awake()
     {
-        instance = this;
+        s_Instance = this;
     }
     
     /// <summary>
@@ -32,11 +31,11 @@ public class AStarManager : MonoBehaviour
         
         foreach (Node n in FindObjectsOfType<Node>())
         {
-            n.gScore = float.MaxValue;
+            n.GScore = float.MaxValue;
         }
 
-        start.gScore = 0;
-        start.hScore = Vector2.Distance(start.transform.position, end.transform.position);
+        start.GScore = 0;
+        start.HScore = Vector2.Distance(start.transform.position, end.transform.position);
         openSet.Add(start);
 
         while (openSet.Count > 0)
@@ -63,22 +62,22 @@ public class AStarManager : MonoBehaviour
                 
                 while (currentNode != start)
                 {
-                    currentNode = currentNode.cameFrom;
+                    currentNode = currentNode.CameFrom;
                     path.Add(currentNode);
                 }
                 path.Reverse();
                 return path;
             }
             
-            foreach (Node connectedNode in currentNode.connections)
+            foreach (Node connectedNode in currentNode.Connections)
             {
-                float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
+                float heldGScore = currentNode.GScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
                 
-                if (heldGScore < connectedNode.gScore)
+                if (heldGScore < connectedNode.GScore)
                 {
-                    connectedNode.cameFrom = currentNode;
-                    connectedNode.gScore = heldGScore;
-                    connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
+                    connectedNode.CameFrom = currentNode;
+                    connectedNode.GScore = heldGScore;
+                    connectedNode.HScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
                     
                     if (!openSet.Contains(connectedNode))
                     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,24 +10,24 @@ public class NPCBehavior : AI, IInteractable
     enum State { Idle, Pathing }
 
     [Header("NPC")]
-    [SerializeField] State state;
-    [SerializeField] Dialogue dialogueData;
-    bool dialogueActive = false;
+    [SerializeField] private State _state;
+    [SerializeField] private Dialogue _dialogueData;
+    private bool _dialogueActive = false;
     
-    new void Awake()
+    private new void Awake()
     {
         base.Awake();
     }
     
-    new void Start()
+    private new void Start()
     {
         base.Start();
-        DialogueManager.instance.dialogueFinished += FinishDialogue;
+        DialogueManager.s_Instance.DialogueFinished += FinishDialogue;
     }
     
-    void Update()
+    private void Update()
     {
-        switch (state)
+        switch (_state)
         {
             case State.Idle:
                 break;
@@ -39,25 +37,37 @@ public class NPCBehavior : AI, IInteractable
         }
     }
 
+    /// <summary>
+    /// Passes <c>Dialogue Data</c> into the <c>Dialogue Manager</c>.
+    /// <para>
+    /// If there is no dialogue currently active, it opens the dialogue UI and
+    /// prints the first line of dialogue. Successive calls print the next line
+    /// until it reaches the last line.
+    /// </para>
+    /// <see cref="DialogueManager.cs"/>
+    /// </summary>
     public void Interact()
     {
-        if (!dialogueData) return;
+        if (!_dialogueData) return;
         
-        if (dialogueActive)
+        if (_dialogueActive)
         {
-            DialogueManager.instance.NextLine(dialogueData);
+            DialogueManager.s_Instance.NextLine(_dialogueData);
         }
         else
         {
-            dialogueActive = true;
-            DialogueManager.instance.StartDialogue(dialogueData);
+            _dialogueActive = true;
+            DialogueManager.s_Instance.StartDialogue(_dialogueData);
         }
     }
-    
-    void FinishDialogue() { dialogueActive = false; }
+
+    private void FinishDialogue()
+    {
+        _dialogueActive = false;
+    }
 
     public bool CanInteract()
     {
-        return !dialogueActive;
+        return !_dialogueActive;
     }
 }

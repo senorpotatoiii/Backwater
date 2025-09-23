@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +24,13 @@ using UnityEngine;
 /// </summary>
 public class Node : MonoBehaviour
 {
-    public Node cameFrom;
-    public List<Node> connections;
+    public Node CameFrom;
+    public List<Node> Connections;
     
     /// <value>Distance from starting point.</value>
-    public float gScore;
+    public float GScore;
     /// <value>Distance from end point.</value>
-    public float hScore;
+    public float HScore;
     /// <value>Sum of gScore and hScore.</value>
-    public float FScore { get => gScore + hScore; }
+    public float FScore { get => GScore + HScore; }
 }

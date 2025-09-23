@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1739b9957dc53c64986f70569f3b22b1, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  isNPC: 1
-  npcName: Detective
-  portrait: {fileID: 21300000, guid: 07a56b436ce4ad84ba1046c6a60e2d10, type: 3}
-  typingSpeed: 0.05
-  dialogueLines:
-  - This is a test line
-  - The purpose of this line is testing
-  - I want max to shake his ass for me
-  - This line is for testing purposes
+  _isNPC: 1
+  _npcName: Detective
+  _portrait: {fileID: 21300000, guid: 07a56b436ce4ad84ba1046c6a60e2d10, type: 3}
+  _typingSpeed: 0.05
+  _dialogueLines:
+  - This is a test.
+  - This is for test purposes.

@@ -274,7 +274,7 @@ MonoBehaviour:
     m_ActionName: Movement/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1930019094414248339, guid: 55b742bf8786dda409655926d7155487, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FieldOfView, Assembly-CSharp
         m_MethodName: Flashlight
         m_Mode: 0
@@ -321,4 +321,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c7c154c78ce8449877ffbe669dfc16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
+  _movementSpeed: 3

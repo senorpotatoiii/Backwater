@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Stores all relevant data for dialogue scenes.
+/// </summary>
 [CreateAssetMenu(fileName="NewDialogue", menuName="Dialogue")]
 public class Dialogue : ScriptableObject
 {
-    [SerializeField] bool isNPC;
-    [SerializeField] string npcName;
-    [SerializeField] Sprite portrait;
-    [SerializeField] float typingSpeed = 0.05f;
-    [SerializeField] string[] dialogueLines;
+    [SerializeField] private bool _isNPC;
+    [SerializeField] private string _npcName;
+    [SerializeField] private Sprite _portrait;
+    [SerializeField] private float _typingSpeed = 0.05f;
+    [SerializeField] private string[] _dialogueLines;
     
-    public bool IsNPC { get => isNPC; }
-    public string NPCName { get => npcName; }
-    public Sprite Portrait { get => portrait; }
-    public float TypingSpeed{ get => typingSpeed; set => typingSpeed = value; }
-    public string[] DialogueLines { get => dialogueLines; }
+    public bool IsNPC { get => _isNPC; }
+    public string NPCName { get => _npcName; }
+    public Sprite Portrait { get => _portrait; }
+    public float TypingSpeed{ get => _typingSpeed; set => _typingSpeed = value; }
+    public string[] DialogueLines { get => _dialogueLines; }
 }
