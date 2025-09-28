@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject _dialoguePannel;
     [SerializeField] private Image _portraitImage;
     [SerializeField] private TMP_Text _nameText, _dialogueText;
+    private Dialogue _data;
     private bool _isTyping;
     private int _dialogueIndex;
     
@@ -18,6 +19,8 @@ public class DialogueManager : MonoBehaviour
     /// Called when the current dialogue finishes its last line.
     /// </summary>
     public Action DialogueFinished;
+    
+    public void Data(Dialogue data) { _data = data; }
     
     private void Awake()
     {
@@ -31,14 +34,13 @@ public class DialogueManager : MonoBehaviour
     /// </para>
     /// <see cref="TypeLine"/>
     /// </summary>
-    /// <param name="data"></param>
-    public void StartDialogue(Dialogue data)
+    public void StartDialogue()
     {
-        if (data.IsNPC)
+        if (_data.IsNPC)
         {
-            _nameText.SetText(data.NPCName);
+            _nameText.SetText(_data.NPCName);
             _portraitImage.gameObject.SetActive(true);
-            _portraitImage.sprite = data.Portrait;
+            _portraitImage.sprite = _data.Portrait;
         }
         else
         {
@@ -47,7 +49,7 @@ public class DialogueManager : MonoBehaviour
         }
         _dialogueIndex = 0;
         _dialoguePannel.SetActive(true);
-        StartCoroutine(TypeLine(data));
+        StartCoroutine(TypeLine());
     }
     
     /// <summary>
@@ -58,18 +60,22 @@ public class DialogueManager : MonoBehaviour
     /// </para>
     /// <see cref="TypeLine"/>, <see cref="EndDialogue"/>
     /// </summary>
-    /// <param name="data"></param>
-    public void NextLine(Dialogue data)
+    public void NextLine()
     {
         if (_isTyping)
         {
             StopAllCoroutines();
-            _dialogueText.SetText(data.DialogueLines[_dialogueIndex]);
+            _dialogueText.SetText(_data.DialogueLines[_dialogueIndex]);
             _isTyping = false;
         }
-        else if (++_dialogueIndex < data.DialogueLines.Length)
+        else if (++_dialogueIndex < _data.DialogueLines.Length)
         {
-            StartCoroutine(TypeLine(data));
+            StartCoroutine(TypeLine());
+        }
+        else if (_data.NextDialogue)
+        {
+            _data = _data.NextDialogue;
+            StartDialogue();
         }
         else
         {
@@ -82,11 +88,10 @@ public class DialogueManager : MonoBehaviour
     /// Then iterates through the characters in the line, turning all
     /// characters revealed to far visible again.
     /// </summary>
-    /// <param name="data"></param>
-    private IEnumerator TypeLine(Dialogue data)
+    private IEnumerator TypeLine()
     {
         _isTyping = true;
-        string currentLine = data.DialogueLines[_dialogueIndex];
+        string currentLine = _data.DialogueLines[_dialogueIndex];
         _dialogueText.SetText("<color=#00000000>" + currentLine + "</color>");
         string printedCharacters;
         string hiddenCharacters;
@@ -98,7 +103,7 @@ public class DialogueManager : MonoBehaviour
             hiddenCharacters = currentLine.Substring(i--, currentLine.Length - printedCharacters.Length);
 
             _dialogueText.SetText(printedCharacters + "<color=#00000000>" + hiddenCharacters + "</color>");
-            yield return new WaitForSeconds(data.TypingSpeed);
+            yield return new WaitForSeconds(_data.TypingSpeed);
         }
 
         _isTyping = false;

@@ -52,12 +52,13 @@ public class NPCBehavior : AI, IInteractable
         
         if (_dialogueActive)
         {
-            DialogueManager.s_Instance.NextLine(_dialogueData);
+            DialogueManager.s_Instance.NextLine();
         }
         else
         {
             _dialogueActive = true;
-            DialogueManager.s_Instance.StartDialogue(_dialogueData);
+            DialogueManager.s_Instance.Data(_dialogueData);
+            DialogueManager.s_Instance.StartDialogue();
         }
     }
 

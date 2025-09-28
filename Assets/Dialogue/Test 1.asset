@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1739b9957dc53c64986f70569f3b22b1, type: 3}
-  m_Name: Test
+  m_Name: Test 1
   m_EditorClassIdentifier: 
-  _isNPC: 1
-  _npcName: Detective
-  _portrait: {fileID: 21300000, guid: 07a56b436ce4ad84ba1046c6a60e2d10, type: 3}
+  character: 1
   _typingSpeed: 0.05
   _dialogueLines:
-  - This is a test.
-  - This is for test purposes.
+  - Will you do the sexing with me.
+  - . . .
+  - Fuck you you're ugly anyway.
+  _nextDialogue: {fileID: 0}
