@@ -108,7 +108,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1919
+        width: 197
+        height: 467
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27877b3ec1be8054ebf458c3f6c0c336
+      internalID: 583287183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 1934
+        width: 197
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6931c6d677c83f44a733b67f85f3555
+      internalID: -1658206289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1211
+        y: 1930
+        width: 197
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c64d384fbbdc2b46bed4d7b90975ce9
+      internalID: -619120551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1278
+        width: 197
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ab151b50cf85d40881b0c239dd6cf8
+      internalID: -1160014168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 1274
+        width: 197
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee0ae87891bf1294f93a6d78eadfb72b
+      internalID: 739547778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 1278
+        width: 197
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 628a412cd357cf742b4ef49a90ea22db
+      internalID: 1691804232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 638
+        width: 272
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efa8f4a729b89e043a8dba39fbde9f2b
+      internalID: 877375652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 635
+        width: 301
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d19658214f385e04eb7ffd023367bb95
+      internalID: 524589336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 638
+        width: 301
+        height: 452
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ed37c8170aa9a4baded3415acd4daa
+      internalID: -954505312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 10
+        width: 301
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 957d5fbabf5f4794285b865d7d8618b4
+      internalID: -603074621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 10
+        width: 302
+        height: 467
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f647ed6acd62619408781bd7054b896f
+      internalID: 1919998599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Detective_Animation_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 6
+        width: 301
+        height: 467
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0472cc8dcb78021458f79712d378d0de
+      internalID: -1103015416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +371,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Detective_Animation_Sheet_0: 583287183
+      Detective_Animation_Sheet_1: -1658206289
+      Detective_Animation_Sheet_10: 1919998599
+      Detective_Animation_Sheet_11: -1103015416
+      Detective_Animation_Sheet_2: -619120551
+      Detective_Animation_Sheet_3: -1160014168
+      Detective_Animation_Sheet_4: 739547778
+      Detective_Animation_Sheet_5: 1691804232
+      Detective_Animation_Sheet_6: 877375652
+      Detective_Animation_Sheet_7: 524589336
+      Detective_Animation_Sheet_8: -954505312
+      Detective_Animation_Sheet_9: -603074621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

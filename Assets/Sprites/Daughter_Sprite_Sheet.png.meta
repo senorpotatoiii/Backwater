@@ -108,7 +108,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Daughter_Sprite_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 918
+        width: 385
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb0686d35831eb44fb4fce6d3ad9f0a6
+      internalID: 1564674619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daughter_Sprite_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 930
+        width: 214
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ec87d29ed3fa747921272bd7a98e37
+      internalID: -741207081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daughter_Sprite_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 133
+        width: 385
+        height: 599
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fb984fd794757b4ca2e0faf0aece5c1
+      internalID: 1467112284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Daughter_Sprite_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 144
+        width: 215
+        height: 598
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0827847cd9c15f44290c63c6ee185c41
+      internalID: 1667173377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +203,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Daughter_Sprite_Sheet_0: 1564674619
+      Daughter_Sprite_Sheet_1: -741207081
+      Daughter_Sprite_Sheet_2: 1467112284
+      Daughter_Sprite_Sheet_3: 1667173377
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

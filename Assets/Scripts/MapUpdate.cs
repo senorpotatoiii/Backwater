@@ -24,7 +24,7 @@ public class MapUpdate : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            ChangeCameraBounds(_mapBoundry1, _mapBoundry2);
+            ChangeCameraBounds();
             CenterPlayerPosition(collision.gameObject);
         }
     }
@@ -38,24 +38,23 @@ public class MapUpdate : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log(_currentBoundry.gameObject.name);
-            if (false)
+            if (!_currentBoundry.bounds.Contains(collision.gameObject.transform.position))
             {
-                ChangeCameraBounds(_mapBoundry1, _mapBoundry2);
+                ChangeCameraBounds();
             }
         }
     }
 
-    private void ChangeCameraBounds(PolygonCollider2D collider1, PolygonCollider2D collider2)
+    private void ChangeCameraBounds()
     {
-        if (!collider1 || !collider2) { return; }
-        if (_confiner.m_BoundingShape2D == collider1)
+        if (!_mapBoundry1 || !_mapBoundry2) { return; }
+        if (_confiner.m_BoundingShape2D == _mapBoundry1)
         {
-            _confiner.m_BoundingShape2D = _currentBoundry = collider2;
+            _confiner.m_BoundingShape2D = _currentBoundry = _mapBoundry2;
         }
-        else if (_confiner.m_BoundingShape2D == collider2)
+        else if (_confiner.m_BoundingShape2D == _mapBoundry2)
         {
-            _confiner.m_BoundingShape2D = _currentBoundry = collider1;
+            _confiner.m_BoundingShape2D = _currentBoundry = _mapBoundry1;
         }
     }
 
