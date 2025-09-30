@@ -12,4 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1739b9957dc53c64986f70569f3b22b1, type: 3}
   m_Name: Test0
   m_EditorClassIdentifier: 
-  _dialogues: []
+  _dialogues:
+  - character: 1
+    _typingSpeed: 0.05
+    _dialogueLines:
+    - Hello my good m'lady.
+    - How are you on this fine evening?
+  - character: 2
+    _typingSpeed: 0.05
+    _dialogueLines:
+    - Ew
+  - character: 1
+    _typingSpeed: 0.05
+    _dialogueLines:
+    - Yeah I get that a lot...

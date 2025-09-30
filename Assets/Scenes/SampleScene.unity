@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialoguePannel: {fileID: 1175658487}
-  _portraitImage: {fileID: 1159565868}
-  _nameText: {fileID: 809282279}
+  _portrait: {fileID: 1159565868}
+  _name: {fileID: 809282279}
   _dialogueText: {fileID: 1791616505}
 --- !u!1 &199665265
 GameObject:
@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 1917931644089264533, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
       propertyPath: _dialogueData
       value: 
-      objectReference: {fileID: 11400000, guid: 00361279a26dc0f4b9ae1db6beab5c6c, type: 2}
+      objectReference: {fileID: 11400000, guid: 0c828fd9c7422634daff1818ebe69740, type: 2}
     - target: {fileID: 4523426855823495578, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -1915,9 +1915,17 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 628793884}
+    - target: {fileID: 4532516527410714591, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5410580863220815499, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410580863220815499, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8283885131225624530, guid: ee473c2f5f03db94fbf0d1d785b3d480, type: 3}
       propertyPath: m_LocalPosition.x
