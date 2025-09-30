@@ -45,6 +45,9 @@ public class MapUpdate : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the camera bounds to the bound not currently active.
+    /// </summary>
     private void ChangeCameraBounds()
     {
         if (!_mapBoundry1 || !_mapBoundry2) { return; }

@@ -4,78 +4,95 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Contains all logic for executing dialogue scenes.
+/// </summary>
 public class DialogueManager : MonoBehaviour
 {
-    [HideInInspector] public static DialogueManager s_Instance;
-    
+    public static DialogueManager s_Instance { get; private set; }
+
     [SerializeField] private GameObject _dialoguePannel;
-    [SerializeField] private Image _portraitImage;
-    [SerializeField] private TMP_Text _nameText, _dialogueText;
-    private Dialogue _data;
-    private bool _isTyping;
+    [SerializeField] private Image _portrait;
+    [SerializeField] private TMP_Text _name;
+    [SerializeField] private TMP_Text _dialogueText;
+    private Conversation _dialogue;
     private int _dialogueIndex;
-    
+    private int _lineIndex;
+    private bool _typing = false;
+
     /// <summary>
     /// Called when the current dialogue finishes its last line.
     /// </summary>
     public Action DialogueFinished;
-    
-    public void Data(Dialogue data) { _data = data; }
-    
+
     private void Awake()
     {
-        s_Instance = this;
+        if (!s_Instance) s_Instance = this;
+        else Destroy(gameObject);
     }
 
     /// <summary>
-    /// <para>
-    /// Initializes all necessary values and text fields, then starts
-    /// the typing coroutine.
-    /// </para>
-    /// <see cref="TypeLine"/>
+    /// Sets up the dialogue scene.
     /// </summary>
-    public void StartDialogue()
+    /// <param name="dialogue"></param>
+    public void StartDialogue(Conversation dialogue)
     {
-        if (_data.IsNPC)
-        {
-            _nameText.SetText(_data.NPCName);
-            _portraitImage.gameObject.SetActive(true);
-            _portraitImage.sprite = _data.Portrait;
-        }
-        else
-        {
-            _nameText.SetText("");
-            _portraitImage.gameObject.SetActive(false);
-        }
+        _dialogue = dialogue;
         _dialogueIndex = 0;
+        _lineIndex = 0;
+        if (_dialogue.Dialogues.Length == 0)
+        {
+            EndDialogue();
+            return;
+        }
         _dialoguePannel.SetActive(true);
+        SetupSpeaker(_dialogue.Dialogues[_dialogueIndex]);
         StartCoroutine(TypeLine());
     }
     
     /// <summary>
+    /// Sets the speaker portrait and name.
+    /// </summary>
+    /// <param name="speakerData"></param>
+    private void SetupSpeaker(Dialogue speakerData)
+    {
+        if (speakerData.IsNPC)
+        {
+            _portrait.sprite = speakerData.Portrait;
+            _name.SetText(speakerData.NPCName);
+        }
+        else
+        {
+            _portrait.sprite = null;
+            _name.SetText("");
+        }
+    }
+    
+    /// <summary>
     /// <para>
-    /// If a line is currently being printed, skips to the end of the line.
-    /// Otherwise, starts printing the next line if one is available and
-    /// ends the dialogue if there isn't.
+    /// If a line is currently being typed, completes the line. Otherwise, checks the current speaker
+    /// and line. If it's the last speaker and line, ends the dialogue. If not, switches to the next speaker
+    /// if applicable and prints the next line.
     /// </para>
-    /// <see cref="TypeLine"/>, <see cref="EndDialogue"/>
+    /// <see cref="EndDialogue"/>
     /// </summary>
     public void NextLine()
     {
-        if (_isTyping)
+        if (_typing)
         {
             StopAllCoroutines();
-            _dialogueText.SetText(_data.DialogueLines[_dialogueIndex]);
-            _isTyping = false;
+            _dialogueText.SetText(_dialogue.Dialogues[_dialogueIndex].DialogueLines[_lineIndex]);
+            _typing = false;
         }
-        else if (++_dialogueIndex < _data.DialogueLines.Length)
+        else if (++_lineIndex < _dialogue.Dialogues[_dialogueIndex].DialogueLines.Length)
         {
             StartCoroutine(TypeLine());
         }
-        else if (_data.NextDialogue)
+        else if (++_dialogueIndex < _dialogue.Dialogues.Length)
         {
-            _data = _data.NextDialogue;
-            StartDialogue();
+            _lineIndex = 0;
+            SetupSpeaker(_dialogue.Dialogues[_dialogueIndex]);
+            StartCoroutine(TypeLine());
         }
         else
         {
@@ -84,43 +101,36 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the alpha of the current line to 0, turning the text invisible.
-    /// Then iterates through the characters in the line, turning all
-    /// characters revealed to far visible again.
+    /// Sets the current line to invisible. Then iterates through the characters, making them
+    /// visible again.
     /// </summary>
     private IEnumerator TypeLine()
     {
-        _isTyping = true;
-        string currentLine = _data.DialogueLines[_dialogueIndex];
-        _dialogueText.SetText("<color=#00000000>" + currentLine + "</color>");
-        string printedCharacters;
-        string hiddenCharacters;
-
-        for (int i = 0; i < currentLine.Length; i++)
+        _typing = true;
+        string line = _dialogue.Dialogues[_dialogueIndex].DialogueLines[_lineIndex];
+        string charsRevealed;
+        string charsHidden;
+        for (int i = 0; i < line.Length; i++)
         {
-            while (currentLine[i] == ' ') i++;
-            printedCharacters = currentLine.Substring(0, ++i);
-            hiddenCharacters = currentLine.Substring(i--, currentLine.Length - printedCharacters.Length);
+            while (line[i] == ' ') i++;
 
-            _dialogueText.SetText(printedCharacters + "<color=#00000000>" + hiddenCharacters + "</color>");
-            yield return new WaitForSeconds(_data.TypingSpeed);
+            charsRevealed = line.Substring(0, ++i);
+            charsHidden = line.Substring(i--, line.Length - charsRevealed.Length);
+            _dialogueText.SetText(charsRevealed + "<color=#00000000>" + charsHidden + "</color>");
+
+            yield return new WaitForSeconds(_dialogue.Dialogues[_dialogueIndex].TypingSpeed);
         }
-
-        _isTyping = false;
+        _typing = false;
     }
-    
+
     /// <summary>
-    /// <para>
-    /// Stops all typing, calls the <c>Dialogue Finished</c> event,
-    /// and diables the dialogue UI.
-    /// </para>
-    /// <see cref="DialogueFinished"/>
+    /// Deactivates the dialogue UI pannel and calls the
+    /// <c>DialogueFinished</c> Action.
     /// </summary>
     public void EndDialogue()
     {
         StopAllCoroutines();
         DialogueFinished?.Invoke();
-        _dialogueText.SetText("");
         _dialoguePannel.SetActive(false);
     }
 }

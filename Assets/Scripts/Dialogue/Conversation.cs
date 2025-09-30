@@ -3,16 +3,23 @@ using UnityEngine;
 /// <summary>
 /// Stores all relevant data for dialogue scenes.
 /// </summary>
-[CreateAssetMenu(fileName="NewDialogue", menuName="Dialogue")]
-public class Dialogue : ScriptableObject
+[CreateAssetMenu(fileName = "NewConversation", menuName = "Conversation")]
+public class Conversation : ScriptableObject
+{
+    [SerializeField] private Dialogue[] _dialogues;
+
+    public Dialogue[] Dialogues { get => _dialogues; }
+}
+
+[System.Serializable]
+public class Dialogue
 {
     enum Characters { Object, Detective, Daughter, OldMan }
 
     [SerializeField] private Characters character;
     [SerializeField] private float _typingSpeed = 0.05f;
     [SerializeField] private string[] _dialogueLines;
-    [SerializeField] private Dialogue _nextDialogue;
-    
+
     public bool IsNPC { get => character != Characters.Object; }
     public string NPCName
     {
@@ -50,5 +57,4 @@ public class Dialogue : ScriptableObject
     }
     public float TypingSpeed { get => _typingSpeed; set => _typingSpeed = value; }
     public string[] DialogueLines { get => _dialogueLines; }
-    public Dialogue NextDialogue { get => _nextDialogue; }
 }

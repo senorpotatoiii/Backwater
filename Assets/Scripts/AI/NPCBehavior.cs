@@ -1,8 +1,9 @@
 using UnityEngine;
 
 /// <summary>
+/// <para>
 /// Controller for all friendly AI.
-/// <para></para>
+/// </para>
 /// <see cref="AI.cs"/>, <see cref="IInteractable.cs"/>
 /// </summary>
 public class NPCBehavior : AI, IInteractable
@@ -11,7 +12,7 @@ public class NPCBehavior : AI, IInteractable
 
     [Header("NPC")]
     [SerializeField] private State _state;
-    [SerializeField] private Dialogue _dialogueData;
+    [SerializeField] private Conversation _dialogueData;
     private bool _dialogueActive = false;
     
     private new void Awake()
@@ -38,8 +39,8 @@ public class NPCBehavior : AI, IInteractable
     }
 
     /// <summary>
-    /// Passes <c>Dialogue Data</c> into the <c>Dialogue Manager</c>.
     /// <para>
+    /// Passes <c>Dialogue Data</c> into the <c>Dialogue Manager</c>.
     /// If there is no dialogue currently active, it opens the dialogue UI and
     /// prints the first line of dialogue. Successive calls print the next line
     /// until it reaches the last line.
@@ -48,17 +49,14 @@ public class NPCBehavior : AI, IInteractable
     /// </summary>
     public void Interact()
     {
-        if (!_dialogueData) return;
-        
         if (_dialogueActive)
         {
             DialogueManager.s_Instance.NextLine();
         }
         else
         {
+            DialogueManager.s_Instance.StartDialogue(_dialogueData);
             _dialogueActive = true;
-            DialogueManager.s_Instance.Data(_dialogueData);
-            DialogueManager.s_Instance.StartDialogue();
         }
     }
 

@@ -10,12 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1739b9957dc53c64986f70569f3b22b1, type: 3}
-  m_Name: Test 1
+  m_Name: Test0
   m_EditorClassIdentifier: 
-  character: 1
-  _typingSpeed: 0.05
-  _dialogueLines:
-  - Will you do the sexing with me.
-  - . . .
-  - Fuck you you're ugly anyway.
-  _nextDialogue: {fileID: 0}
+  _dialogues: []
