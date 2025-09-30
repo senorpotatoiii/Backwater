@@ -12,11 +12,12 @@ using UnityEngine;
 /// </summary>
 public class AStarManager : MonoBehaviour
 {
-    [HideInInspector] public static AStarManager s_Instance;
+    public static AStarManager s_Instance { get; private set; }
 
     private void Awake()
     {
-        s_Instance = this;
+        if (!s_Instance) s_Instance = this;
+        else Destroy(gameObject);
     }
     
     /// <summary>

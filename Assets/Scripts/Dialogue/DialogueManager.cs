@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Image _portrait;
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _dialogueText;
+    [SerializeField] private Transform _choiceContainer;
+    [SerializeField] private GameObject _choiceButtonPrefab;
     private Conversation _dialogue;
     private int _dialogueIndex;
     private int _lineIndex;
