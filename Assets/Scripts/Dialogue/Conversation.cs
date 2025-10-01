@@ -19,6 +19,8 @@ public class Dialogue
     [SerializeField] private Characters character;
     [SerializeField] private float _typingSpeed = 0.05f;
     [SerializeField] private string[] _dialogueLines;
+    [SerializeField] private int _nextIndex;
+    [SerializeField] private Choices[] _choices;
 
     public bool IsNPC { get => character != Characters.Object; }
     public string NPCName
@@ -57,4 +59,16 @@ public class Dialogue
     }
     public float TypingSpeed { get => _typingSpeed; set => _typingSpeed = value; }
     public string[] DialogueLines { get => _dialogueLines; }
+    public int NextIndex { get => _nextIndex; }
+    public Choices[] Choices { get => _choices; }
+}
+
+[System.Serializable]
+public class Choices
+{
+    [SerializeField] private string _choice;
+    [SerializeField] private int _indexTo;
+
+    public string Choice { get => _choice; }
+    public int IndexTo { get => _indexTo; }
 }

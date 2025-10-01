@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     private int _dialogueIndex;
     private int _lineIndex;
     private bool _typing = false;
+    private bool _choiceActive = false;
 
     /// <summary>
     /// Called when the current dialogue finishes its last line.
@@ -49,7 +51,7 @@ public class DialogueManager : MonoBehaviour
         }
         _dialoguePannel.SetActive(true);
         SetupSpeaker(_dialogue.Dialogues[_dialogueIndex]);
-        StartCoroutine(TypeLine());
+        DisplayCurrentLine();
     }
     
     /// <summary>
@@ -69,37 +71,55 @@ public class DialogueManager : MonoBehaviour
             _name.SetText("");
         }
     }
-    
+
     /// <summary>
     /// <para>
     /// If a line is currently being typed, completes the line. Otherwise, checks the current speaker
     /// and line. If it's the last speaker and line, ends the dialogue. If not, switches to the next speaker
     /// if applicable and prints the next line.
     /// </para>
-    /// <see cref="EndDialogue"/>
+    /// <see cref="TypeLine"/>
     /// </summary>
     public void NextLine()
     {
+        if (_choiceActive) return;
         if (_typing)
         {
             StopAllCoroutines();
             _dialogueText.SetText(_dialogue.Dialogues[_dialogueIndex].DialogueLines[_lineIndex]);
             _typing = false;
+            CheckChoice();
+            return;
         }
-        else if (++_lineIndex < _dialogue.Dialogues[_dialogueIndex].DialogueLines.Length)
+
+        if (++_lineIndex < _dialogue.Dialogues[_dialogueIndex].DialogueLines.Length)
         {
-            StartCoroutine(TypeLine());
+            DisplayCurrentLine();
         }
-        else if (++_dialogueIndex < _dialogue.Dialogues.Length)
+        else if (_dialogue.Dialogues[_dialogueIndex].Choices.Length == 0)
         {
             _lineIndex = 0;
+            _dialogueIndex = _dialogue.Dialogues[_dialogueIndex].NextIndex;
+            if (_dialogueIndex == -1)
+            {
+                EndDialogue();
+                return;
+            }
             SetupSpeaker(_dialogue.Dialogues[_dialogueIndex]);
-            StartCoroutine(TypeLine());
+            DisplayCurrentLine();
         }
-        else
-        {
-            EndDialogue();
-        }
+    }
+    
+    /// <summary>
+    /// <para>
+    /// Stops all coroutines and prints the next line of dialogue.
+    /// </para>
+    /// <see cref="TypeLine"/>
+    /// </summary>
+    private void DisplayCurrentLine()
+    {
+        StopAllCoroutines();
+        StartCoroutine(TypeLine());
     }
 
     /// <summary>
@@ -112,6 +132,7 @@ public class DialogueManager : MonoBehaviour
         string line = _dialogue.Dialogues[_dialogueIndex].DialogueLines[_lineIndex];
         string charsRevealed;
         string charsHidden;
+        
         for (int i = 0; i < line.Length; i++)
         {
             while (line[i] == ' ') i++;
@@ -122,7 +143,59 @@ public class DialogueManager : MonoBehaviour
 
             yield return new WaitForSeconds(_dialogue.Dialogues[_dialogueIndex].TypingSpeed);
         }
+        
         _typing = false;
+        CheckChoice();
+    }
+    
+    /// <summary>
+    /// If the current line is the last in a dialogue that has a player
+    /// choice, create choice buttons and set <c>choiceActive</c> to true.
+    /// </summary>
+    private void CheckChoice()
+    {
+        if (_lineIndex == _dialogue.Dialogues[_dialogueIndex].DialogueLines.Length - 1
+            && _dialogue.Dialogues[_dialogueIndex].Choices.Length > 0)
+        {
+            _choiceActive = true;
+            foreach (Choices choice in _dialogue.Dialogues[_dialogueIndex].Choices)
+            {
+                CreateChoiceButton(choice.Choice, () => SetChoice(choice.IndexTo));
+            }
+        }
+    }
+
+    /// <summary>
+    /// <para>
+    /// Sets the <c>dialogueIndex</c> to the one specified by the dialogue
+    /// choice, then clears the buttons and types the next line.
+    /// </para>
+    /// <see cref="TypeLine"/>
+    /// </summary>
+    /// <param name="index"></param>
+    public void SetChoice(int index)
+    {
+        _dialogueIndex = index;
+        foreach (Transform child in _choiceContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        DisplayCurrentLine();
+        _choiceActive = false;
+    }
+
+    /// <summary>
+    /// Creates a button as a child of the dialogue choice pannel.
+    /// </summary>
+    /// <param name="choiceText"></param>
+    /// <param name="onClick"></param>
+    /// <returns></returns>
+    private GameObject CreateChoiceButton(string choiceText, UnityEngine.Events.UnityAction onClick)
+    {
+        GameObject choiceButton = Instantiate(_choiceButtonPrefab, _choiceContainer);
+        choiceButton.GetComponentInChildren<TMP_Text>().text = choiceText;
+        choiceButton.GetComponent<Button>().onClick.AddListener(onClick);
+        return choiceButton;
     }
 
     /// <summary>

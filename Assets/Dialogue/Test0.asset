@@ -18,11 +18,34 @@ MonoBehaviour:
     _dialogueLines:
     - Hello my good m'lady.
     - How are you on this fine evening?
+    _nextIndex: 1
+    _choices: []
   - character: 2
     _typingSpeed: 0.05
     _dialogueLines:
-    - Ew
+    - Why would you ask me that?
+    _nextIndex: 0
+    _choices:
+    - _choice: I'm a nice guy.
+      _indexTo: 2
+    - _choice: I'm sorry.
+      _indexTo: 3
+  - character: 2
+    _typingSpeed: 0.05
+    _dialogueLines:
+    - Ew...
+    _nextIndex: -1
+    _choices: []
+  - character: 2
+    _typingSpeed: 0.05
+    _dialogueLines:
+    - Let's just move past that then...
+    - To the business of my father's disappearence.
+    _nextIndex: 4
+    _choices: []
   - character: 1
     _typingSpeed: 0.05
     _dialogueLines:
-    - Yeah I get that a lot...
+    - When did he go missing?
+    _nextIndex: -1
+    _choices: []
