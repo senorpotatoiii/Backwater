@@ -1,6 +1,6 @@
 ---
-name: Art Task
-about: Create an art task
+name: Art Child
+about: Create an art subtask
 title: "[ART] "
 labels: art
 assignees: ''

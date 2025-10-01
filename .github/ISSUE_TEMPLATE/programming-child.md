@@ -1,6 +1,6 @@
 ---
-name: Programming Task
-about: Create a programming task
+name: Programming Child
+about: Create a programming subtask
 title: "[PROG] "
 labels: programming
 assignees: ''

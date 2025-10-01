@@ -1,6 +1,6 @@
 ---
-name: Group Task
-about: Create a group task
+name: Group Parent
+about: Create a group task with subtasks
 title: "[GROUP] "
 labels: group
 assignees: ''
