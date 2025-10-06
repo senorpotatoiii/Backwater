@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b331c581fe8df6b47a0fd8f25c638df0
+guid: 9a221a84f166b7c4fac3002da7ec0c51
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 480
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,19 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -113,10 +100,10 @@ TextureImporter:
       name: Daughter_Sprite_Sheet_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 918
-        width: 385
-        height: 598
+        x: 1
+        y: 32
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb0686d35831eb44fb4fce6d3ad9f0a6
-      internalID: 1564674619
+      spriteID: c3b2da2d9b9b0ae43bb010b4b8a54e00
+      internalID: 563382161
       vertices: []
       indices: 
       edges: []
@@ -134,10 +121,10 @@ TextureImporter:
       name: Daughter_Sprite_Sheet_1
       rect:
         serializedVersion: 2
-        x: 1118
-        y: 930
-        width: 214
-        height: 598
+        x: 32
+        y: 32
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03ec87d29ed3fa747921272bd7a98e37
-      internalID: -741207081
+      spriteID: 7aa8da326fee14247bf94e49b37f6cc8
+      internalID: -260293315
       vertices: []
       indices: 
       edges: []
@@ -155,10 +142,10 @@ TextureImporter:
       name: Daughter_Sprite_Sheet_2
       rect:
         serializedVersion: 2
-        x: 158
-        y: 133
-        width: 385
-        height: 599
+        x: 1
+        y: 1
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fb984fd794757b4ca2e0faf0aece5c1
-      internalID: 1467112284
+      spriteID: 625d6ecf6e0f9ca46896de17e1194a79
+      internalID: 805190152
       vertices: []
       indices: 
       edges: []
@@ -176,10 +163,10 @@ TextureImporter:
       name: Daughter_Sprite_Sheet_3
       rect:
         serializedVersion: 2
-        x: 1092
-        y: 144
-        width: 215
-        height: 598
+        x: 32
+        y: 1
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0827847cd9c15f44290c63c6ee185c41
-      internalID: 1667173377
+      spriteID: e54a2ccad155ecb469215cf13d2dd6d8
+      internalID: 1526954022
       vertices: []
       indices: 
       edges: []
@@ -204,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Daughter_Sprite_Sheet_0: 1564674619
-      Daughter_Sprite_Sheet_1: -741207081
-      Daughter_Sprite_Sheet_2: 1467112284
-      Daughter_Sprite_Sheet_3: 1667173377
+      Daughter_Sprite_Sheet_0: 563382161
+      Daughter_Sprite_Sheet_1: -260293315
+      Daughter_Sprite_Sheet_2: 805190152
+      Daughter_Sprite_Sheet_3: 1526954022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -281,6 +281,10 @@ PrefabInstance:
       propertyPath: _dialogueData
       value: 
       objectReference: {fileID: 11400000, guid: 0c828fd9c7422634daff1818ebe69740, type: 2}
+    - target: {fileID: 3163439751046234582, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 563382161, guid: 9a221a84f166b7c4fac3002da7ec0c51, type: 3}
     - target: {fileID: 4523426855823495578, guid: 6e5e9bcaa9e898940bcfc9fb5446db80, type: 3}
       propertyPath: m_Name
       value: NPC
